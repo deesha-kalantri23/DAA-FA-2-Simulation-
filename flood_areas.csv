@@ -1,0 +1,21 @@
+Area_ID,Area_Name,Water_Level_m,Population_Affected
+A01,Shivaji Nagar,2.5,850
+A02,Kothrud,5.8,1240
+A03,Viman Nagar,3.2,670
+A04,Hinjewadi,7.1,1580
+A05,Wakad,4.6,920
+A06,Baner,6.3,1430
+A07,Kharadi,3.9,760
+A08,Hadapsar,8.2,1890
+A09,Aundh,2.8,540
+A10,Pimpri,6.9,1720
+A11,Chinchwad,5.1,1150
+A12,Bhosari,7.6,1640
+A13,Dhankawadi,4.2,810
+A14,Katraj,6.1,1320
+A15,Warje,3.5,690
+A16,Lohegaon,5.5,980
+A17,Yerawada,7.9,1810
+A18,Dapodi,4.8,1050
+A19,Swargate,6.5,1370
+A20,Camp,3.7,620
