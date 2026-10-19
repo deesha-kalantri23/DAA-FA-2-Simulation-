@@ -67,6 +67,7 @@ c:\Users\Saleha Shaikh\OneDrive\Desktop\DAA FA-2\
 - Pygame (`pygame >= 2.5.0`)
 
 ### Installation & Launch
+<<<<<<< HEAD
 ### 🚀 Run on Web (Browser Edition - Zero Install Required)
 You can run the entire simulation directly in any modern web browser:
 
@@ -85,6 +86,15 @@ Open Terminal or PowerShell in the project folder:
 ```bash
 # Run the desktop application window
 python3 main.py
+=======
+Open PowerShell or Command Prompt in the project folder:
+
+```powershell
+# 1. Run the desktop application window
+.\.venv\Scripts\python.exe main.py
+
+# (Or run python main.py if pygame is installed globally)
+>>>>>>> origin/main
 ```
 
 ### Running the C++ Backend (Optional for Viva)
