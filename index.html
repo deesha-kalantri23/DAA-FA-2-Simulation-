@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flood Evacuation Priority System — DAA Merge Sort Simulation</title>
+  <meta name="description" content="College Design and Analysis of Algorithms (DAA) FA-2 Project: Flood Evacuation Priority System using Recursive Manual Merge Sort (Divide & Conquer Paradigm)." />
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="brand-section">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Flood Evacuation Priority System</h1>
+          <p>DAA FA-2 • MERGE SORT SIMULATION</p>
+        </div>
+      </div>
+
+      <!-- Navigation Breadcrumb Chips -->
+      <nav class="stepper-nav" id="stepperNav" aria-label="Simulation Scenes"></nav>
+
+      <!-- Header Utilities -->
+      <div class="header-actions">
+        <div id="statusBadge" class="badge badge-running">
+          <span class="pulse-dot"></span>
+          <span id="statusBadgeText">RUNNING</span>
+        </div>
+
+        <!-- Sound Toggle -->
+        <button id="btnSound" class="icon-btn" title="Toggle Sound Effects (Web Audio)">
+          <svg id="soundIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="btnTheme" class="icon-btn" title="Toggle Light/Dark Theme">
+          <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN INTERACTIVE WORKSPACE -->
+    <main class="main-layout">
+      <!-- Central Viewport -->
+      <section class="viewport-card">
+        <div class="viewport-header">
+          <div>
+            <h2 id="sceneTitle">Scene Loading...</h2>
+            <p id="sceneSubtitle">Educational Divide and Conquer visualization</p>
+          </div>
+          <div id="sceneMetaBadge" class="badge badge-demo">STAGE 1 / 9</div>
+        </div>
+
+        <div class="scene-container" id="sceneContainer">
+          <!-- Dynamic scene content injected here -->
+        </div>
+      </section>
+
+      <!-- Right Educational HUD Side Panel -->
+      <aside class="hud-panel">
+        <div class="hud-header">
+          <h3>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            DAA Algorithm Telemetry HUD
+          </h3>
+        </div>
+
+        <div class="hud-body">
+          <!-- Current Operation & Range -->
+          <div class="hud-section">
+            <div class="hud-section-title">
+              <span>ACTIVE OPERATION</span>
+              <span id="hudOpBadge" class="badge badge-demo">STANDBY</span>
+            </div>
+            <div class="stat-grid-2">
+              <div class="stat-box">
+                <div class="stat-label">Active Subarray</div>
+                <div class="stat-value" id="hudActiveRange" style="font-size:13px;">[0..19]</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Recursion Depth</div>
+                <div class="stat-value" id="hudTreeDepth">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Counters Telemetry -->
+          <div class="hud-section">
+            <div class="hud-section-title">
+              <span>RUNTIME METRICS</span>
+              <span style="font-size:9.5px; color:var(--low-color); font-weight:700;">VERIFIED</span>
+            </div>
+            <div class="stat-grid-2">
+              <div class="stat-box">
+                <div class="stat-label">Comparisons</div>
+                <div class="stat-value" id="hudCompsCount" style="color:var(--compare-color);">0</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Merges Done</div>
+                <div class="stat-value" id="hudMergesCount" style="color:var(--selected-color);">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Explanation Box -->
+          <div class="hud-section">
+            <div class="hud-section-title">
+              <span>STEP EXPLANATION</span>
+            </div>
+            <div class="explanation-card" id="hudExplanation">
+              <strong>Initialization</strong>
+              Real-time telemetry showing water depth gauges and population density across monitored sectors.
+            </div>
+          </div>
+
+          <!-- DAA Academic Viva Cards -->
+          <div class="hud-section">
+            <div class="hud-section-title">
+              <span>DAA VIVA CONCEPTS</span>
+            </div>
+            <div class="viva-box">
+              <div class="viva-title">Why Merge Sort for Flood Triage?</div>
+              <div class="viva-desc">Guarantees deterministic O(n log n) sorting even in catastrophic worst-case monsoon data. Stable order preserves input sequence for identical water levels.</div>
+            </div>
+            <div class="viva-box" style="border-left-color: var(--low-color); margin-top:8px;">
+              <div class="viva-title">Recurrence: T(n) = 2T(n/2) + O(n)</div>
+              <div class="viva-desc">Master Theorem Case 2 applies since f(n) = O(n) = &Theta;(n^(log_2 2)). Solves directly to &Theta;(n log n).</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- BOTTOM CONTROL DOCK -->
+    <footer class="bottom-dock">
+      <div class="playback-controls">
+        <button id="btnPlayPause" class="btn btn-primary" title="Play or Pause (Spacebar)">
+          <svg id="playPauseIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span id="playPauseText">PAUSE</span>
+        </button>
+
+        <button id="btnPrev" class="btn btn-secondary" title="Previous Step (Left Arrow)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="19 20 9 12 19 4 19 20"></polygon>
+            <line x1="5" y1="19" x2="5" y2="5"></line>
+          </svg>
+          PREV
+        </button>
+
+        <button id="btnNext" class="btn btn-secondary" title="Next Step (Right Arrow)">
+          NEXT
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+            <line x1="19" y1="5" x2="19" y2="19"></line>
+          </svg>
+        </button>
+
+        <button id="btnReset" class="btn btn-danger" title="Reset All (R key)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M2.5 2v6h6M21.5 22v-6h-6"></path>
+            <path d="M22 11.5A10 10 0 0 0 3.2 7.2L2.5 8M2 12.5a10 10 0 0 0 18.8 4.3l.7-.8"></path>
+          </svg>
+          RESET
+        </button>
+
+        <button id="btnDemoMode" class="btn btn-secondary" title="Toggle Manual Demo Mode (D key)">
+          DAA DEMO MODE
+        </button>
+      </div>
+
+      <!-- Speed Presets -->
+      <div class="speed-group">
+        <button class="speed-btn" data-speed="SLOW" title="Slow pace (1.2s)">SLOW</button>
+        <button class="speed-btn active" data-speed="MEDIUM" title="Medium pace (0.55s)">MED</button>
+        <button class="speed-btn" data-speed="FAST" title="Fast pace (0.15s)">FAST</button>
+      </div>
+
+      <!-- Keyboard Shortcuts Caption -->
+      <div class="keyboard-hints">
+        <span>KEYS:</span>
+        <span><span class="kbd">SPACE</span> Play/Pause</span>
+        <span><span class="kbd">&rarr;</span> Next</span>
+        <span><span class="kbd">&larr;</span> Prev</span>
+        <span><span class="kbd">R</span> Reset</span>
+        <span><span class="kbd">D</span> Demo</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Audio Synthesis & Application Controller -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
